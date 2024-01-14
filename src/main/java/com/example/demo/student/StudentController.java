@@ -12,31 +12,14 @@ import java.util.List;
 @RequestMapping(path = "api/v1/students")
 public class StudentController {
 
-    @GetMapping
-    public List<Student> getStudents(){
-        return List.of(
-                new Student(
-                        1L,
-                        "Marco",
-                        26,
-                        "marco@gmail.com",
-                        LocalDate.of(1997, Month.JANUARY,17)
-                ),
-                new Student(
-                        2L,
-                        "Giacomo",
-                        24,
-                        "giacomo@gmail.com",
-                        LocalDate.of(1999, Month.MARCH,20)
-                ),
-                new Student(
-                        3L,
-                        "Alex",
-                        23,
-                        "Alex@gmail.com",
-                        LocalDate.of(2000, Month.APRIL,11)
-                )
-        );
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
+    @GetMapping
+    public List<Student> getStudents(){
+        return studentService.getStudents();
+    }
 }
