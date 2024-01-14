@@ -26,3 +26,18 @@ Go to [Spring Initializr](https://start.spring.io/)
 - **Spring Web**
 - **Spring Data JPA**
 - **PostgreSQL**
+
+
+## Connection To PostgreSQl
+
+- Terminal Example input:
+
+1. `template1=# GRANT ALL PRIVILEGES ON DATABASE "template1" TO mohamed;
+GRANT`
+
+2. `template1=# GRANT ALL PRIVILEGES ON DATABASE "template1" TO postgres;
+GRANT`
+
+3. Add to pom.xml the JPA DATA dependency
+
+
