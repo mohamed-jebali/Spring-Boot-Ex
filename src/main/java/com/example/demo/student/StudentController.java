@@ -48,4 +48,10 @@ public class StudentController {
     public void registerNewStudent (@RequestBody Student student){
         studentService.addNewStudent(student);
     }
+
+//    {
+//            "name": "Stefano",
+//            "email": "marco@gmail.com",
+//            "dateOfBirth": "1966-01-17"
+//    }
 }
