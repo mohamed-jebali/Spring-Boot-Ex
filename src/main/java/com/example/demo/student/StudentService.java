@@ -1,5 +1,6 @@
 package com.example.demo.student;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,13 @@ public class StudentService {
 
     public List<Student> getStudents(){
         return studentRepository.findAll();
+    }
+
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("ID not found"));
+    }
+
+    public void addNewStudent(Student student){
+        System.out.println(student);
     }
 }

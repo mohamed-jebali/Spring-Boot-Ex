@@ -3,9 +3,10 @@ package com.example.demo.student;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
-@Table
+@Table(name = "student")
 public class Student {
     @Id
     @SequenceGenerator(
@@ -18,8 +19,10 @@ public class Student {
             generator = "student_sequence"
     )
 
+    @Column(name = "id")
     private Long id;
     private String name;
+    @Transient
     private Integer age;
 
     private String email;
@@ -60,7 +63,8 @@ public class Student {
     }
 
     public Integer getAge() {
-        return age;
+
+        return Period.between(this.dateOfBirth,LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
