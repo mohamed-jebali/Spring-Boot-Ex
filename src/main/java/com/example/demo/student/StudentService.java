@@ -29,6 +29,12 @@ public class StudentService {
     }
 
     public void addNewStudent(Student student){
+        Long studentId = student.getId();
+
+        if (studentRepository.findById(studentId).isPresent()) {
+            throw new IllegalStateException("Student with ID " + studentId + " already exists");
+        }
+
         studentRepository.save(student);
     }
 }
