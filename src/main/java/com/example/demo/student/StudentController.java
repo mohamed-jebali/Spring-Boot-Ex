@@ -49,6 +49,11 @@ public class StudentController {
         studentService.addNewStudent(student);
     }
 
+    @DeleteMapping(path = "{studentId}")
+    public  void  deleteStudent (@PathVariable Long studentId){
+        studentService.deleteStudent(studentId);
+    }
+
 //    {
 //            "name": "Stefano",
 //            "email": "marco@gmail.com",

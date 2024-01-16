@@ -2,8 +2,10 @@ package com.example.demo.student;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -36,5 +38,16 @@ public class StudentService {
         }
 
         studentRepository.save(student);
+    }
+
+    public ResponseEntity<String> deleteStudent(Long studentId){
+        boolean studentIdExistence = studentRepository.existsById(studentId);
+                if(!studentIdExistence){
+                    throw new IllegalStateException("Student with ID " + studentId + " does not exist");
+                }
+                else {
+                    studentRepository.deleteById(studentId);
+                    return ResponseEntity.ok("Student with ID " + studentId + " deleted successfully");
+                }
     }
 }
