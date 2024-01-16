@@ -1,6 +1,7 @@
 package com.example.demo.student;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -49,5 +51,22 @@ public class StudentService {
                     studentRepository.deleteById(studentId);
                     return ResponseEntity.ok("Student with ID " + studentId + " deleted successfully");
                 }
+    }
+
+    @Transactional
+    public void updateStudent(
+            Long studentId,
+            String name,
+            String email)
+    {
+        Student student = studentRepository.findById(studentId).
+                orElseThrow(() -> new IllegalStateException
+                        ("student with ID " + studentId + " not Found" ));
+        if(name != null && !name.isEmpty() && !Objects.equals(student.getName(),name)){
+            student.setName(name);
+        }
+        if(email != null && !email.isEmpty() && !Objects.equals(student.getEmail(),email)){
+            student.setEmail(email);
+        }
     }
 }
